@@ -19,6 +19,14 @@
             type: Phaser.AUTO,
             width: 800,
             height: 600,
+            // add physics here
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    gravity: { y: 300 },
+                    debug: false
+                }
+            },
             scene: {
                 preload: preload,
                 create: create,
@@ -27,6 +35,7 @@
         }
 
         let game = new Phaser.Game(config);
+        let bgm;
         let platforms;
 
         function preload () {
@@ -38,12 +47,16 @@
                 frameWidth: 32, frameHeight: 48
             })
 
-            this.load.audio('boden', ['assets/audio/bodenstaendig_2000_in_rock_4bit.mp3', 'assets/audio/bodenstaendig_2000_in_rock_4bit.ogg']);
+            this.load.audio('bgm', ['assets/sd-ingame1.wav']);
         }
 
         function create () {
             // load image
             this.add.image(400, 300, 'sky')
+            // load bgm 
+            bgm = this.sound.add('bgm')
+            bgm.volume = 0.2
+            bgm.play()
             // create physics
             platforms = this.physics.add.staticGroup();
             platforms.create(400, 568, 'ground').setScale(2).refreshBody();
