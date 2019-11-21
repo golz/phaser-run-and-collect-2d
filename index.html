@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Run and Collect Game :D</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.20.1/dist/phaser.min.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        let config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        }
+
+        let game = new Phaser.Game(config);
+        let platforms;
+
+        function preload () {
+            this.load.image('sky', 'assets/sky.png')
+            this.load.image('ground', 'assets/platform.png')
+            this.load.image('star', 'assets/star.png')
+            this.load.image('bomb', 'assets/bomb.png')
+            this.load.spritesheet('dude', 'assets/dude.png', {
+                frameWidth: 32, frameHeight: 48
+            })
+
+            this.load.audio('boden', ['assets/audio/bodenstaendig_2000_in_rock_4bit.mp3', 'assets/audio/bodenstaendig_2000_in_rock_4bit.ogg']);
+        }
+
+        function create () {
+            // load image
+            this.add.image(400, 300, 'sky')
+            // create physics
+            platforms = this.physics.add.staticGroup();
+            platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        }
+
+        function update () {
+        }
+    </script>
+</body>
+</html>
